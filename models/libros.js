@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 //le damos una estructuras al schema de la tabla
 const librosSchema = new Schema({
-    name: {type:String, required: true},
+    name: {type:String, unique:true ,required: true},
     numPages: {type:Number, required: true, min: 1},
     category: {type:String, required: true},
     author: {type:String, required: true}

@@ -4,10 +4,19 @@ const Category = require('../models/categorys');
 
 const existLibro = async (name) =>{
     const libroDb = await Libro.findOne({name});
+    const idlibroDb = await Libro.findOne({id});
     if(libroDb){
         throw new Error(`Book ${name} already exists in database`);
     }
 }
+
+const existLibroEdit = async (name, {req}) => {
+    const libroByName = await Libro.findOne({ name });
+    
+    if (libroByName && libroByName.id !== req.params.id) {
+        throw new Error(`Book ${name} already exists in the database`);
+    }
+};
 
 const existAutor = async (name) =>{
     const autorDb = await Autor.findOne({name});
@@ -23,4 +32,4 @@ const existCategory = async (name) =>{
     }
 }
 
-module.exports = {existLibro,existAutor,existCategory};
+module.exports = {existLibro,existAutor,existCategory,existLibroEdit};

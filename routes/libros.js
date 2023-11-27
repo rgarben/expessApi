@@ -3,7 +3,7 @@ const router = express.Router();
 const {check} = require("express-validator");
 const {getLibros,getLibro,addLibros,delLibros,editLibros} = require("../controllers/libros");
 const {validateFields} = require("../middlewares/validate-fields");
-const {existLibro} = require("../helpers/db-validators");
+const {existLibro,existLibroEdit} = require("../helpers/db-validators");
 
 router.route('/').get(getLibros)
 .post([    
@@ -30,6 +30,7 @@ router.route('/:id').get(getLibro)
     check('category','Category is required').not().notEmpty(),
     check('author','Author is required').not().notEmpty(),
     check('id', "El id no es valido para Mongo").isMongoId(),
+    check('name','_id').custom(existLibroEdit),
     validateFields
 ],editLibros);
 
