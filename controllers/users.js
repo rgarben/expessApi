@@ -26,10 +26,13 @@ const getUser = async (req, res) =>{
 //Agregamos un user a la base de datos
 const addUser = async (req, res) =>{
     //creamos una constante para guardar el body
-    const user = req.body;
+    const {login,name, password, active, role, email} = req.body;
+    const user = new User({login:login,name:name, password:password, active:active, role:role, email:email});
     const salt = bcryptjs.genSaltSync();
     encryptedPassword = bcryptjs.hashSync( req.body.password, salt);
     user.password = encryptedPassword;
+    user.active = true;
+    user.role = 'USER_ROLE';
     const newUser = new User(user);
 
     try {
