@@ -5,8 +5,8 @@ const {getUser,getUsers,addUser,editUser,delUser} = require("../controllers/user
 const {validateFields} = require("../middlewares/validate-fields");
 const {existUserEmail, existUserLogin,existIdUser} = require("../helpers/db-validators");
 
-const { validateJWT } = require("../middlewares/validateJwt");
-const { hasRole } = require("../middlewares/validateRol");
+const { validateJWT } = require("../middlewares/validate-jwt");
+const { hasRole } = require("../middlewares/validate-rol");
 
 router
 .route('/')
