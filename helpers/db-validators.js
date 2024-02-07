@@ -33,6 +33,13 @@ const existUserLogin = async (login, {req}) => {
     }
 };
 
+const existIdUser = async (id,{req})=>{
+    const usernameDB = await Usuario.findById(id);
+    if(!usernameDB){
+        throw new Error(`This id ${id} dont exist`);
+    }
+}
+
 const existAutor = async (name) =>{
     const autorDb = await Autor.findOne({name});
     if(autorDb){
@@ -47,4 +54,4 @@ const existCategory = async (name) =>{
     }
 }
 
-module.exports = {existLibro,existAutor,existCategory,existLibroEdit,existUserEmail,existUserLogin};
+module.exports = {existIdUser,existLibro,existAutor,existCategory,existLibroEdit,existUserEmail,existUserLogin};
