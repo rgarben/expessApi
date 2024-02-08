@@ -11,7 +11,7 @@ const getUserLogin = async (req, res) => {
                 if(validPassword){
                     const payload = {uid: user.id}
                     const token = jwt.sign(payload, process.env.SECRET, {expiresIn: '4h'})
-                    res.status(200).json(user, token);
+                    res.status(200).json({user, token});
                 }else{
                     res.status(400).json({message: "error"})
                 }
